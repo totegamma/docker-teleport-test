@@ -1,0 +1,40 @@
+version: '3'
+networks:
+    teleportSubnet:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 192.168.58.0/24
+                  gateway: 192.168.58.1
+
+services:
+    proxy:
+        build:
+            context: ./proxy
+        networks:
+            teleportSubnet:
+                ipv4_address: 192.168.58.10
+        ports:
+            - "3080:3080"
+        tty: true
+
+    node1:
+        build:
+            context: ./node
+        networks:
+            teleportSubnet:
+                ipv4_address: 192.168.58.11
+        tty: true
+
+    node2:
+        build:
+            context: ./node
+        networks:
+            teleportSubnet:
+                ipv4_address: 192.168.58.12
+        tty: true
+
+
+
+

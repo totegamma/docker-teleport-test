@@ -1,0 +1,24 @@
+version: v2
+teleport:
+  nodename: node
+  data_dir: /var/lib/teleport
+  log:
+    output: stderr
+    severity: INFO
+    format:
+      output: text
+  ca_pin: []
+  diag_addr: ""
+auth_service:
+  enabled: "no"
+ssh_service:
+  enabled: "yes"
+  labels:
+    level: "normal"
+  commands:
+  - name: hostname
+    command: [hostname]
+    period: 1m0s
+proxy_service:
+  enabled: "no"
+
